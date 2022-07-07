@@ -1,4 +1,5 @@
-area = []
+office = []
+off_num = ''
 
 def show_menu():
     print('*******************************************')
@@ -30,12 +31,27 @@ def show_search_menu():
 def office_manage():
     show_submenu()
 
+
+
+
     n = int(input('Enter the number of the menu >'))
     while True:
+        
+        #retrieve
         if n == 1:
-            pass
-        elif n == 2:
-            pass
+            print("")
+        
+        #input menu
+        elif n == 2: 
+        
+            b_name=input('Enter building name >')
+            off_name=input("Enter a room >")
+            om_name=input("Enter a office manager name >")
+
+            office.append([b_name,off_name,om_name])
+
+
+            
         elif n == 3:
             pass
         else:
