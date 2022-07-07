@@ -1,9 +1,11 @@
 from datetime import *
 
-office = [['0001', 'eb', '4147', 'Park'], ['0002', 'nsb', '1151', 'Kim']]
-area = [['001', '0001', '4', '5'], ['001', '0002', '3', '4']]
-product = [['1', '0001', '001', '1', '1', '1', 'park', '20220707',
-            '-'], ['2', '0002', '001', '2', '2', '2', '-', '-', '-']]
+office = [['0001', 'Eng. Bld.', '4147', 'Park'],
+          ['0002', 'Hehwa Bld.', '1151', 'Kim']]
+area = [['001', '0001', 'Shelf', 'Hong'], [
+    '002', '0001', 'Box', 'Min'], ['001', '0002', 'Locker', 'Cha']]
+product = [['1', '0001', '001', 'PC', 'Mac', '2m', 'park', '20220707',
+            '-'], ['2', '0002', '001', 'Printer', 'Cannon', '400k', '-', '-', '-'], ['3', '0001', '002', 'Lamp', 'Edison', '3k', '-', '-', '-']]
 off_num = 0
 ar_num = 0
 
@@ -431,8 +433,16 @@ def search_prod():
     n = int(input('Enter the number of the menu > '))
     if n == 1:
         for i in range(len(office)):
-            print('#{} '.format(office[i][0]))
+            print('#{}\t{} {}\t\tManager:{}'.format(
+                office[i][0], office[i][1], office[i][2], office[i][3]))
             for j in range(len(area)):
+                if area[j][1] == office[i][0]:
+                    for k in range(len(product)):
+                        if (area[j][0] == product[k][2]) and (area[j][1] == product[k][1]):
+                            print('\t#{} | {}\t(#{}){} | {} in charge'.format(
+                                area[j][0], area[j][2], product[k][0], product[k][3], area[j][3]))
+            print()
+
     elif n == 2:
         pass
     else:
