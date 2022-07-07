@@ -428,23 +428,64 @@ def product_manage():
 
 
 # 2019113632 박정규
+def show_p_code():
+    print('\nSearchable product code.')
+    for i in range(len(product)):
+        print(product[i][0], end='\t')
+    print('\n')
+
+
+# 2019113632 박정규
+def show_all_prod():
+    for i in range(len(office)):
+        print('\n#{}\t{} {}\t\tManager:{}'.format(
+            office[i][0], office[i][1], office[i][2], office[i][3]))
+        for j in range(len(area)):
+            if area[j][1] == office[i][0]:
+                for k in range(len(product)):
+                    if (area[j][0] == product[k][2]) and (area[j][1] == product[k][1]):
+                        print('\t#{} | {}\t(#{}){} | {} in charge'.format(
+                            area[j][0], area[j][2], product[k][0], product[k][3], area[j][3]))
+        print()
+
+
+def find_prod(idx):
+    for i in range(len(office)):
+        if product[idx][1] == office[i][0]:
+            print('\n#{}\t{} {}\t\tManager:{}'.format(
+                office[i][0], office[i][1], office[i][2], office[i][3]))
+    for j in range(len(area)):
+        if (product[idx][2] == area[j][0]) and (area[j][1] == product[idx][1]):
+            print('\t#{} | {}\t(#{}){} | {} in charge'.format(
+                area[j][0], area[j][2], product[idx][0], product[idx][3], area[j][3]))
+
+    print()
+
+
+# 2019113632 박정규
 def search_prod():
     show_search_menu()
     n = int(input('Enter the number of the menu > '))
     if n == 1:
-        for i in range(len(office)):
-            print('#{}\t{} {}\t\tManager:{}'.format(
-                office[i][0], office[i][1], office[i][2], office[i][3]))
-            for j in range(len(area)):
-                if area[j][1] == office[i][0]:
-                    for k in range(len(product)):
-                        if (area[j][0] == product[k][2]) and (area[j][1] == product[k][1]):
-                            print('\t#{} | {}\t(#{}){} | {} in charge'.format(
-                                area[j][0], area[j][2], product[k][0], product[k][3], area[j][3]))
-            print()
-
+        show_all_prod()
+        search_prod()
     elif n == 2:
-        pass
+        show_p_code()
+        isFound = False
+        while True:
+            p_code = input('Enter product code to delete > ')
+            for i in range(len(product)):
+                if p_code == product[i][0]:
+                    find_prod(i)
+                    isFound = True
+                    break
+            if isFound == True:
+                break
+
+            print('\n!!! Please enter product code correctly.')
+        search_prod()
+    elif n == 3:
+        main_menu()
     else:
         print('Enter the number between 1 to 3')
         search_prod()
