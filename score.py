@@ -23,17 +23,18 @@ def show_list():
     print('Index\tID\tName\tKorean\tEnglish\tMath')
     print('---------- ---------- ---------- ---------- ---------- ----------')
     for i in range(len(kor_li)):
-        print('{}\t{}\t{}\t{}\t{}\t{}'.format(i + 1, id_li[i], name_li[i], kor_li[i], eng_li[i], math_li[i]))
+        print('{}\t{}\t{}\t{}\t{}\t{}'.format(i + 1, id_li[i], name_li[i], kor_li[i], eng_li[i], math_li[i])) 
 
 # input & update에서 재사용.
 def input_sub(sub):
     if sub == 'kor':
         kor = int(input('Korean > '))
-        while kor < 0 or kor > 100:
+      while kor < 0 or kor > 100:
             print('Please enter a number between 0 to 100!!')
             kor = int(input('Korean > '))
         return kor
     elif sub == 'eng':
+
         eng = int(input('English > '))
         while eng < 0 or eng > 100:
             print('Please enter a number between 0 to 100!!')
