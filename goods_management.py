@@ -1,4 +1,4 @@
-from datetime import *
+import sys
 
 office = [['0001', 'Eng. Bld.', '4147', 'Park'],
           ['0002', 'Hehwa Bld.', '1151', 'Kim']]
@@ -264,7 +264,7 @@ def product_manage():
 
                     p_type = input('Enter Product Type > ')
                     p_name = input('Enter Product Name > ')
-                    p_price = int(input('Enter Product Price > '))
+                    p_price = input('Enter Product Price > ')
                     lender = '-'
                     len_date = '-'
                     ret_date = '-'
@@ -437,8 +437,11 @@ def show_p_code():
 
 # 2019113632 박정규
 def show_all_prod():
+    f = open('./test.txt','w')
     for i in range(len(office)):
         print('\n#{}\t{} {}\t\tManager:{}'.format(
+            office[i][0], office[i][1], office[i][2], office[i][3]))
+        f.write('\n#{}\t{} {}\t\tManager:{}'.format(
             office[i][0], office[i][1], office[i][2], office[i][3]))
         for j in range(len(area)):
             if area[j][1] == office[i][0]:
@@ -446,7 +449,12 @@ def show_all_prod():
                     if (area[j][0] == product[k][2]) and (area[j][1] == product[k][1]):
                         print('\t#{} | {}\t(#{}){} | {} in charge'.format(
                             area[j][0], area[j][2], product[k][0], product[k][3], area[j][3]))
+                        f.write('\n\t#{} | {}\t(#{}){} | {} in charge'.format(
+                            area[j][0], area[j][2], product[k][0], product[k][3], area[j][3]))
+
         print()
+        f.write('\n')
+    f.close()
 
 
 def find_prod(idx):
@@ -512,7 +520,7 @@ def main_menu():
         # 종료
         elif n == 5:
             print('Exit program')
-            exit()
+            sys.exit(0)
         else:
             print('\nPlease enter number between 1 to 5.\n')
             main_menu()
