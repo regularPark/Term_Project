@@ -16,7 +16,9 @@ def show_menu():
     print('2. Area Management')
     print('3. Product management')
     print('4. Search Product')
-    print('5. Quit')
+    print('5. Save File')
+    print('6. Read File')
+    print('7. Quit')
     print('*******************************************')
 
 
@@ -89,7 +91,7 @@ def office_manage():
         elif n == 5:
             main_menu()
         else:
-            print('\nPlease enter number between 1 to 5.\n')
+            print('\n !!! Please enter number between 1 to 5.\n')
             office_manage()
 
 
@@ -116,7 +118,7 @@ def area_manage():
 
         if n == 1:
             if len(area) == 0:
-                print('\nEmpty list. Enter info first.\n')
+                print('\n!!! Empty list. Enter info first.\n')
                 area_manage()
             else:
                 show_area()
@@ -124,13 +126,13 @@ def area_manage():
 
         elif n == 2:
             if len(office) == 0:
-                print('No office data. Input office first')
+                print('\n !!! No office data. Input office first.\n')
                 area_manage()
             else:
                 print('Exist office code')
                 for i in range(len(office)):
                     print('{}'.format(office[i][0]))
-
+                isInput = False
                 while True:
                     off_code = input('Enter office code > ')
                     for i in range(len(office)):
@@ -143,25 +145,32 @@ def area_manage():
                             area.append(
                                 [ar_code, off_code, ar_name, ar_m_name])
                             show_area()
-                            area_manage()
-                    print('Enter exist Office code.')
+                            isInput = True
 
+                    if isInput == True:
+                        break
+                    print('\n!!! Enter exist Office code.')
+                area_manage()
         elif n == 3:
             if len(area) > 0:
                 print('\nUpdate Area Info')
                 show_area()
+                isUpdated = False
                 while True:
                     f_ar_code = input('Enter area code to update > ')
+                    f_of_code = input('Enter office code to delete > ')
                     for i in range(len(area)):
-                        if f_ar_code == area[i][0]:
+                        if f_ar_code == area[i][0] and f_of_code == area[i][1]:
                             area[i][2] = input('Enter new area name > ')
                             area[i][3] = input(
                                 'Enter new area manager Name > ')
                             print('Updated.\n')
                             show_area()
-
-                            area_manage()
-                    print('Enter exist Area code.')
+                            isUpdated = True
+                    if isUpdated == True:
+                        break
+                    print('!!! Enter exist Area code and office code correctly. !!!')
+                area_manage()
             else:
                 print('Enter area info first.')
                 area_manage()
@@ -169,16 +178,20 @@ def area_manage():
         elif n == 4:
             print('\nDelete Area Info')
             show_area()
+            isDeleted = False
             while True:
                 f_ar_code = input('Enter area code to delete > ')
+                f_of_code = input('Enter office code to delete > ')
                 for i in range(len(area)):
-                    if f_ar_code == area[i][0]:
+                    if f_ar_code == area[i][0] and f_of_code == area[i][1]:
                         area.remove(area[i])
                         print('Deleted.\n')
                         show_area()
-
-                        area_manage()
-                print('Enter exist Area code.')
+                        isDeleted = True
+                if isDeleted == True:
+                    break
+                print('Enter exist Area code and office code correctly.')
+            area_manage()
         elif n == 5:
             main_menu()
         else:
@@ -198,7 +211,7 @@ def check_code():
     for i in range(len(area)):
         print('{}\t\t{}'.format(area[i][1], area[i][0]))
 
-    while isOfCode == False:
+    while True:
         off_num = input('Enter Office Code > ')
         for j in range(len(area)):
             if off_num == area[j][1]:
@@ -208,7 +221,7 @@ def check_code():
             break
         print('!!! Please check Office code correctly.')
 
-    while isArCode == False:
+    while True:
         ar_num = input('Enter Area Code > ')
         for k in range(len(area)):
             if ar_num == area[k][0]:
@@ -218,7 +231,7 @@ def check_code():
             break
         print('!!! Please check Area code correctly.')
 
-    return off_num, ar_num, True, True
+    return off_num, ar_num, isOfCode, isArCode
 
 
 # 2019113632 박정규
@@ -499,6 +512,25 @@ def search_prod():
         search_prod()
 
 
+# 2019113632 박정규
+def save_file():
+    f = open('output.txt', 'w')
+    f.write('Office Info.\n')
+    f.write('Ofc.\tBld.\t\tOfc.\t\tOfc.\n')
+    f.write('Code\tName\t\tAddress\t\tManager\n')
+    for i in range(len(office)):        
+        f.write('{}\t{}\t\t{}\t\t{}\n\n'.format(office[i][0], office[i][1], office[i][2], office[i][3]))
+    
+    f.write('Area Info.\n')
+    f.write('Area\tOfc.\t\tArea\t\tArea\n')
+    f.write('Code\tCode\t\tName\t\tCharger\n')
+    for j in range(len(area)):
+        f.write('{}\t{}\t\t{}\t\t{}\n'.format(area[j][0], area[j][1], area[j][2],area[j][3]))
+
+    
+    f.close()
+    main_menu()
+
 def main_menu():
 
     print('\n\t\tMain Menu')
@@ -517,12 +549,18 @@ def main_menu():
         # 물품 검색
         elif n == 4:
             search_prod()
-        # 종료
+        # 파일 출력
         elif n == 5:
+            save_file()
+        # 파일 읽어오기
+        elif n == 6:
+            pass        
+        # 종료
+        elif n == 7:
             print('Exit program')
             sys.exit(0)
         else:
-            print('\nPlease enter number between 1 to 5.\n')
+            print('\n!!! Please enter number between 1 to 5.\n')
             main_menu()
 
 

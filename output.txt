@@ -1,0 +1,13 @@
+Office Info.
+Ofc.	Bld.		Ofc.		Ofc.
+Code	Name		Address		Manager
+0001	Eng. Bld.		4147		Park
+
+0002	Hehwa Bld.		1151		Kim
+
+Area Info.
+Area	Ofc.		Area		Area
+Code	Code		Name		Charger
+001	0001		Shelf		Hong
+002	0001		Box		Min
+001	0002		Locker		Cha
