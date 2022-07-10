@@ -1,13 +1,29 @@
 Office Info.
-Ofc.	Bld.		Ofc.		Ofc.
-Code	Name		Address		Manager
+Ofc.	Bld.			Ofc.		Ofc.
+Code	Name			Address		Manager
+-------------------------------------
 0001	Eng. Bld.		4147		Park
-
 0002	Hehwa Bld.		1151		Kim
 
 Area Info.
 Area	Ofc.		Area		Area
 Code	Code		Name		Charger
-001	0001		Shelf		Hong
-002	0001		Box		Min
-001	0002		Locker		Cha
+-------------------------------------
+001		0001		Shelf		Hong
+002		0001		Table		Min
+001		0002		Locker		Cha
+
+Product Info.
+Prod.	Ofc.	Area	Prod.
+Code	Code	Code	Type	Name	Price
+-------------------------------------
+1		0001	001		Desktop	Windows	2m
+2		0002	001		Printer	Cannon	400k
+3		0001	002		Lamp	Edison	3k
+
+		Lend		Return
+Lender	Date		Date
+-------------------------------------
+park	20220707		-
+-	-		-
+-	-		-
