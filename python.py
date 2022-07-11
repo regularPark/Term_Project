@@ -2,7 +2,6 @@ from re import I
 
 import datetime
 
-from hamcrest import none
 today = datetime.date.today()
 
 off_code = 0
@@ -170,8 +169,7 @@ def area_menu():
             off_code=input('Please enter office code >')
                         
             for i in range(len(office)):
-                if office[i][0] == off_code:
-                    print(office[i][0])
+                if office[i][0] == off_code:                   
 
                     area_code += 1 
                     area_num = format(area_code, '03') 
