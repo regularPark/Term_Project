@@ -3,8 +3,8 @@ import sys
 office = [['0001', 'Eng. Bld.', '4147', 'Park'],
           ['0002', 'Hehwa Bld.', '1151', 'Kim']]
 area = [['001', '0001', 'Shelf', 'Hong'], [
-    '002', '0001', 'Box', 'Min'], ['001', '0002', 'Locker', 'Cha']]
-product = [['1', '0001', '001', 'PC', 'Mac', '2m', 'park', '20220707',
+    '002', '0001', 'Table', 'Min'], ['001', '0002', 'Locker', 'Cha']]
+product = [['1', '0001', '001', 'Desktop', 'Windows', '2m', 'park', '20220707',
             '-'], ['2', '0002', '001', 'Printer', 'Cannon', '400k', '-', '-', '-'], ['3', '0001', '002', 'Lamp', 'Edison', '3k', '-', '-', '-']]
 off_num = 0
 ar_num = 0
@@ -51,6 +51,15 @@ def show_search_menu():
     print('*******************************************')
 
 
+def show_office():
+    print('Ofc.\tBld.\t\tOfc.\t\tOfc.')
+    print('Code\tName\t\tAddress\t\tManager')
+    print('-------------------------------------------')
+    for i in range(len(office)):
+        print('{}\t{}\t\t{}\t\t{}\n'.format(
+            office[i][0], office[i][1], office[i][2], office[i][3]))
+
+
 def office_manage():
     print('\n\tOffice Management')
     show_submenu()
@@ -76,18 +85,91 @@ def office_manage():
         elif n == 2:
             off_num += 1
             off_code = format(off_num, '04')
-            b_name = input('Enter building name > ')
-            off_name = input('Enter a room > ')
-            om_name = input('Enter a office manager name > ')
+            b_name = input('Enter building name(-1 to exit) > ')
+            if b_name == '-1':
+                break
+            off_name = input('Enter a office name > ')
+            om_name = input('Enter a office manager\'s name > ')
 
             office.append([off_code, b_name, off_name, om_name])
+            print('Input completed.\n')
 
             office_manage()
 
+        # Update
         elif n == 3:
-            pass
+            print('Available office code')
+            for i in range(len(office)):
+                print(office[i][0], end='\t')
+            isUpdated = False
+
+            while True:
+                off_code = input(
+                    '\nEnter office code to update(-1 to exit) > ')
+                if off_code == '-1':
+                    break
+
+                for j in range(len(office)):
+                    if off_code == office[j][0]:
+                        office[j][1] = input('Enter new building name > ')
+                        office[j][2] = input('Enter new office name > ')
+                        office[j][3] = input(
+                            'Enter new office manager\'s name > ')
+                        isUpdated = True
+                        print('Updated.\n')
+                        show_office()
+                        break
+                if isUpdated == True:
+                    break
+                print('Check office code name correctly.')
+            office_manage()
+
+        # Delete 2019113632 박정규(사무실 삭제시 영역,물품 연쇄 삭제 부분)
         elif n == 4:
-            pass
+            print('Deletable office code')
+            for i in range(len(office)):
+                print(office[i][0], end='\t')
+            isDeleted = True
+            o_cnt = a_cnt = p_cnt = 0
+
+            while True:
+                off_code = input(
+                    '\nEnter office code to delete(-1 to exit) > ')
+                if off_code == '-1':
+                    break
+
+                for j in range(len(office)):
+                    if off_code == office[j][0]:
+                        office.remove(office[j])
+                        o_cnt += 1
+                        isDeleted == True
+                        break   # 영역코드가 같은 것은 한개 뿐
+                if o_cnt > 0:
+                    print('{} Office deleted.'.format(o_cnt))
+
+                for k in range(len(area) - 1, -1, -1):
+                    if off_code == area[k][1]:
+                        area.remove(area[k])
+                        a_cnt += 1
+                if a_cnt > 0:
+                    print('{} Area deleted.'.format(a_cnt))
+
+                for l in range(len(product)-1, -1, -1):
+                    if off_code == product[l][1]:
+                        product.remove(product[l])
+                        p_cnt += 1
+                if p_cnt > 0:
+                    print('{} Product deleted.\n'.format(p_cnt))
+
+                # 종료 조건
+                if isDeleted == True:
+                    show_office()
+                    break
+                print('!!! Check office code correctly.')
+
+            office_manage()
+
+        # back to main
         elif n == 5:
             main_menu()
         else:
@@ -134,7 +216,10 @@ def area_manage():
                     print('{}'.format(office[i][0]))
                 isInput = False
                 while True:
-                    off_code = input('Enter office code > ')
+                    off_code = input('Enter office code(-1 to exit) > ')
+                    if off_code == '-1':
+                        break
+
                     for i in range(len(office)):
                         if off_code == office[i][0]:
                             ar_num += 1
@@ -157,7 +242,11 @@ def area_manage():
                 show_area()
                 isUpdated = False
                 while True:
-                    f_ar_code = input('Enter area code to update > ')
+                    f_ar_code = input(
+                        'Enter area code to update(-1 to exit) > ')
+                    if f_ar_code == '-1':
+                        break
+
                     f_of_code = input('Enter office code to delete > ')
                     for i in range(len(area)):
                         if f_ar_code == area[i][0] and f_of_code == area[i][1]:
@@ -175,19 +264,39 @@ def area_manage():
                 print('Enter area info first.')
                 area_manage()
 
+        # delete 2019113632 박정규(영역 삭제 시 물품 연쇄 삭제 부분)
         elif n == 4:
             print('\nDelete Area Info')
             show_area()
             isDeleted = False
+            a_cnt = p_cnt = 0
+
             while True:
-                f_ar_code = input('Enter area code to delete > ')
+
+                # 영역 삭제
+                f_ar_code = input('Enter area code to delete(-1 to exit) > ')
+                if f_ar_code == '-1':
+                    break
                 f_of_code = input('Enter office code to delete > ')
-                for i in range(len(area)):
+                for i in range(len(area)-1, -1, -1):
                     if f_ar_code == area[i][0] and f_of_code == area[i][1]:
                         area.remove(area[i])
                         print('Deleted.\n')
                         show_area()
+                        a_cnt += 1
                         isDeleted = True
+
+                if a_cnt > 0:
+                    print('{} Area deleted.'.format(a_cnt))
+
+                # 영역에 보관된 물품도 삭제
+                for j in range(len(product)-1, -1, -1):
+                    if product[j][1] == f_of_code and product[j][2] == f_ar_code:
+                        product.remove(product[j])
+                        p_cnt += 1
+
+                if p_cnt > 0:
+                    print('{} product deleted.\n'.format(p_cnt))
                 if isDeleted == True:
                     break
                 print('Enter exist Area code and office code correctly.')
@@ -450,7 +559,7 @@ def show_p_code():
 
 # 2019113632 박정규
 def show_all_prod():
-    f = open('./test.txt','w')
+    f = open('./test.txt', 'w')
     for i in range(len(office)):
         print('\n#{}\t{} {}\t\tManager:{}'.format(
             office[i][0], office[i][1], office[i][2], office[i][3]))
@@ -516,18 +625,35 @@ def search_prod():
 def save_file():
     f = open('output.txt', 'w')
     f.write('Office Info.\n')
-    f.write('Ofc.\tBld.\t\tOfc.\t\tOfc.\n')
-    f.write('Code\tName\t\tAddress\t\tManager\n')
-    for i in range(len(office)):        
-        f.write('{}\t{}\t\t{}\t\t{}\n\n'.format(office[i][0], office[i][1], office[i][2], office[i][3]))
-    
-    f.write('Area Info.\n')
+    f.write('Ofc.\tBld.\t\t\tOfc.\t\tOfc.\n')
+    f.write('Code\tName\t\t\tAddress\t\tManager\n')
+    f.write('-------------------------------------\n')
+    for i in range(len(office)):
+        f.write('{}\t{}\t\t{}\t\t{}\n'.format(
+            office[i][0], office[i][1], office[i][2], office[i][3]))
+
+    f.write('\nArea Info.\n')
     f.write('Area\tOfc.\t\tArea\t\tArea\n')
     f.write('Code\tCode\t\tName\t\tCharger\n')
+    f.write('-------------------------------------\n')
     for j in range(len(area)):
-        f.write('{}\t{}\t\t{}\t\t{}\n'.format(area[j][0], area[j][1], area[j][2],area[j][3]))
+        f.write('{}\t\t{}\t\t{}\t\t{}\n'.format(
+            area[j][0], area[j][1], area[j][2], area[j][3]))
 
-    
+    f.write('\nProduct Info.\n')
+    f.write('Prod.\tOfc.\tArea\tProd.\n')
+    f.write('Code\tCode\tCode\tType\tName\tPrice\n')
+    f.write('-------------------------------------\n')
+    for k in range(len(product)):
+        f.write('{}\t\t{}\t{}\t\t{}\t{}\t{}\n'.format(
+            product[k][0], product[k][1], product[k][2], product[k][3], product[k][4], product[k][5]))
+    f.write('\n\t\tLend\t\tReturn\n')
+    f.write('Lender\tDate\t\tDate\n')
+    f.write('-------------------------------------\n')
+    for k in range(len(product)):
+        f.write('{}\t{}\t\t{}\n'.format(
+            product[k][6], product[k][7], product[k][8]))
+
     f.close()
     main_menu()
 

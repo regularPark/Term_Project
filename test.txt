@@ -1,6 +1,5 @@
 
 #0001	Eng. Bld. 4147		Manager:Park
-	#001 | Shelf	(#1)PC | Hong in charge
 	#002 | Box	(#3)Lamp | Min in charge
 
 #0002	Hehwa Bld. 1151		Manager:Kim
