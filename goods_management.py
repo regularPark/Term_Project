@@ -658,6 +658,17 @@ def save_file():
     main_menu()
 
 
+def read_file():
+    f = open("./output.txt", 'r')
+
+    while True:
+        line = f.readline()
+        if not line:
+            break
+        print(line)
+    f.close()
+    main_menu()
+
 def main_menu():
 
     print('\n\t\tMain Menu')
@@ -681,7 +692,7 @@ def main_menu():
             save_file()
         # 파일 읽어오기
         elif n == 6:
-            pass
+            read_file()        
         # 종료
         elif n == 7:
             print('Exit program')
