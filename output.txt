@@ -1,29 +1,30 @@
 
 #0001	Whk Law		Manager:Kim
-	#001 | Kor	(#A)BF | Lee in charge
-	#001 | Kor	(#B)HP | Lee in charge
+	#001 | Kor	(#A)B | Lee in charge
+	#001 | Kor	(#B)H/P | Lee in charge
 	#002 | Eng	(#C)Smp | Baek in charge
-	#002 | Eng	(#NBA)BASKET | Baek in charge
+	#002 | Eng	(#D)IoT | Baek in charge
+	#002 | Eng	(#I)NBA | Baek in charge
 	#002 | Eng	(#R)Bag | Baek in charge
 	#002 | Eng	(#S)Socks | Baek in charge
 
 #0002	Mhk Teach		Manager:Lee
-	#001 | North	(#D)IOT | Kim in charge
-	#001 | North	(#BB)MS | Kim in charge
+	#001 | North	(#E)BB | Kim in charge
 	#001 | North	(#L)NHL | Kim in charge
-	#002 | West	(#E)BN | Jeon in charge
-	#002 | West	(#G)EPL | Jeon in charge
+	#002 | West	(#F)BN | Jeon in charge
+	#002 | West	(#G)PL | Jeon in charge
 	#002 | West	(#T)Gun | Jeon in charge
 
 #0003	Nek Math		Manager:Jung
 	#001 | East	(#H)Liga | Park in charge
-	#002 | South	(#N)FISH | Moon in charge
-	#002 | South	(#P)FOOT | Moon in charge
+	#002 | South	(#N)Fish | Moon in charge
+	#002 | South	(#P)Foot | Moon in charge
 
 #0004	Jkk Science		Manager:Kang
-	#001 | USA	(#Q)Top | Jim in charge
-	#002 | ITA	(#O)FOOT | Yoon in charge
+	#001 | USA	(#Q)Top | Joe in charge
+	#002 | ITA	(#J)Swim | Andrea in charge
+	#002 | ITA	(#K)Ball | Andrea in charge
+	#002 | ITA	(#O)Foot | Andrea in charge
 
 #0005	Qkh Chem		Manager:Min
-	#001 | SWI	(#K)BALL | Lee in charge
-	#001 | SWI	(#M)BOAT | Lee in charge
+	#001 | SWI	(#M)Boat | Granit in charge

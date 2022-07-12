@@ -1,3 +1,4 @@
+from math import prod
 import sys
 import pickle
 
@@ -55,7 +56,7 @@ def show_office():
     print('Code\tName\t\tAddress\t\tManager')
     print('-------------------------------------------')
     for i in range(len(office)):
-        print('{}\t{}\t\t{}\t\t{}\n'.format(
+        print('{}\t{}\t\t{}\t\t{}'.format(
             office[i][0], office[i][1], office[i][2], office[i][3]))
 
 
@@ -178,11 +179,12 @@ def office_manage():
 
 def show_area():
     if len(area) > 0:
+        area.sort()
         print('*******************************************')
         print('Area Code\tOfc. Code\tArea Name\tArea Manager')
         for i in range(len(area)):
             print('{}\t\t{}\t\t{}\t\t{}'.format(
-                area[i][0], area[i][1], area[i][2], area[i][3]))
+                area[i][1], area[i][0], area[i][2], area[i][3]))
     else:
         print('-------------------------------------------')
         print('There is no data\n')
@@ -223,7 +225,7 @@ def area_manage():
                         if off_code == '-1':
                             break
                         for i in range(len(area)):
-                            if off_code == area[i][1]:
+                            if off_code == area[i][0]:
                                 ar_cnt += 1
 
                         for i in range(len(office)):
@@ -233,8 +235,9 @@ def area_manage():
                                 ar_m_name = input('Enter area manager Name > ')
 
                                 area.append(
-                                    [ar_code, off_code, ar_name, ar_m_name])
+                                    [off_code, ar_code, ar_name, ar_m_name])
                                 show_area()
+                                print('Input completed.\n')
                                 isInput = True
 
                         if isInput == True:
@@ -254,12 +257,12 @@ def area_manage():
 
                         f_of_code = input('Enter office code to delete > ')
                         for i in range(len(area)):
-                            if f_ar_code == area[i][0] and f_of_code == area[i][1]:
+                            if f_ar_code == area[i][1] and f_of_code == area[i][0]:
                                 area[i][2] = input('Enter new area name > ')
                                 area[i][3] = input(
                                     'Enter new area manager Name > ')
-                                print('Updated.\n')
                                 show_area()
+                                print('\nUpdate completed.\n')
                                 isUpdated = True
                         if isUpdated == True:
                             break
@@ -284,7 +287,7 @@ def area_manage():
                         break
                     f_of_code = input('Enter office code to delete > ')
                     for i in range(len(area)-1, -1, -1):
-                        if f_ar_code == area[i][0] and f_of_code == area[i][1]:
+                        if f_ar_code == area[i][1] and f_of_code == area[i][0]:
                             area.remove(area[i])
                             print('Deleted.\n')
                             show_area()
@@ -340,13 +343,13 @@ def check_code():
 
     print('\nAvailable area code')
     for i in range(len(area)):
-        if off_num == area[i][1]:
-            print(area[i][0], end='\t')
+        if off_num == area[i][0]:
+            print(area[i][1], end='\t')
     print()
     while True:
         ar_num = input('Enter Area Code > ')
         for k in range(len(area)):
-            if ar_num == area[k][0] and off_num == area[k][1]:
+            if ar_num == area[k][1] and off_num == area[k][0]:
                 isArCode = True
                 break
         if isArCode == True:
@@ -358,6 +361,7 @@ def check_code():
 
 # 2019113632 박정규
 def show_product():
+    product.sort()
     print('-------------------------------------')
     print('Prod.\tOfc.\tArea\tProd.\t\t\t\tLend\t\tReturn')
     print('code\tnumber\tnumber\ttype\tname\tprice\tLender\tdate\t\tdate')
@@ -596,13 +600,13 @@ def show_all_prod():
         f.write('\n#{}\t{} {}\t\tManager:{}\n'.format(
             office[i][0], office[i][1], office[i][2], office[i][3]))
         for j in range(len(area)):
-            if area[j][1] == office[i][0]:
+            if area[j][0] == office[i][0]:
                 for k in range(len(product)):
-                    if (area[j][0] == product[k][2]) and (area[j][1] == product[k][1]):
+                    if (area[j][1] == product[k][2]) and (area[j][0] == product[k][1]):
                         print('\t#{} | {}\t(#{}){} | {} in charge'.format(
-                            area[j][0], area[j][2], product[k][0], product[k][3], area[j][3]))
+                            area[j][1], area[j][2], product[k][0], product[k][3], area[j][3]))
                         f.write('\t#{} | {}\t(#{}){} | {} in charge\n'.format(
-                            area[j][0], area[j][2], product[k][0], product[k][3], area[j][3]))
+                            area[j][1], area[j][2], product[k][0], product[k][3], area[j][3]))
 
         print()
     f.close()
@@ -614,9 +618,9 @@ def find_prod(idx):
             print('\n#{}\t{} {}\t\tManager:{}'.format(
                 office[i][0], office[i][1], office[i][2], office[i][3]))
     for j in range(len(area)):
-        if (product[idx][2] == area[j][0]) and (area[j][1] == product[idx][1]):
+        if (product[idx][2] == area[j][1]) and (area[j][0] == product[idx][1]):
             print('\t#{} | {}\t(#{}){} | {} in charge'.format(
-                area[j][0], area[j][2], product[idx][0], product[idx][3], area[j][3]))
+                area[j][1], area[j][2], product[idx][0], product[idx][3], area[j][3]))
 
     print()
 
