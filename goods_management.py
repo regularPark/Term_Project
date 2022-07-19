@@ -50,16 +50,24 @@ def show_search_menu():
     print('3. Back to main')
     print('*******************************************')
 
-
+# 2020113425 홍성민
 def show_office():
+    f = open('output.txt', 'a')
     print('Ofc.\tBld.\t\tOfc.\t\tOfc.')
+    f.write('Ofc.\tBld.\t\tOfc.\t\tOfc.\n')    
     print('Code\tName\t\tAddress\t\tManager')
+    f.write('Code\tName\t\tAddress\t\tManager\n')
     print('-------------------------------------------')
     for i in range(len(office)):
         print('{}\t{}\t\t{}\t\t{}'.format(
             office[i][0], office[i][1], office[i][2], office[i][3]))
+        f.write('{}\t{}\t\t{}\t\t{}\n'.format(
+            office[i][0], office[i][1], office[i][2], office[i][3]))
+    f.write('\n')
+    f.close()
 
 
+# 2020113425 홍성민
 def office_manage():
     print('\n\tOffice Management')
     show_submenu()
@@ -74,11 +82,19 @@ def office_manage():
                 print('\nEmpty list. Enter info first.\n')
                 office_manage()
             else:
+                f = open('output.txt', 'a')
+                f.write('\nOffice Retrieve\n')
+                    
                 print('*******************************************')
+
                 print('Ofc. Code\tBld. name\tOfc. address\tOfc. Manager')
+                f.write('Ofc. Code\tBld. name\tOfc. address\tOfc. Manager\n')
                 for i in range(len(office)):
                     print('{}\t\t{}\t\t{}\t\t{}'.format(
                         office[i][0], office[i][1], office[i][2], office[i][3]))
+                    f.write('{}\t\t{}\t\t{}\t\t{}\n'.format(
+                        office[i][0], office[i][1], office[i][2], office[i][3]))
+                f.close()
                 office_manage()
 
         # input menu
@@ -92,6 +108,12 @@ def office_manage():
             om_name = input('Enter a office manager\'s name > ')
 
             office.append([off_code, b_name, off_name, om_name])
+            
+            f = open('output.txt', 'a')
+            f.write('\nOffice Input\n')
+            f.close()
+            show_office()
+            
             print('Input completed.\n')
 
             office_manage()
@@ -117,6 +139,10 @@ def office_manage():
                             'Enter new office manager\'s name > ')
                         isUpdated = True
                         print('Updated.\n')
+                        f = open('output.txt', 'a')
+                        f.write('\nOffice Update\n')
+                        f.close()
+
                         show_office()
                         break
                 if isUpdated == True:
@@ -143,27 +169,46 @@ def office_manage():
                         office.remove(office[j])
                         o_cnt += 1
                         isDeleted == True
+                        f = open('output.txt', 'a')
+                        f.write('\nOffice Delete\n')
+                        f.close()
+
+                        show_office()
                         break   # 영역코드가 같은 것은 한개 뿐
                 if o_cnt > 0:
                     print('{} Office deleted.'.format(o_cnt))
+                
+                if len(area) > 0:
+                    for k in range(len(area) - 1, -1, -1):
+                        if off_code == area[k][1]:
+                            area.remove(area[k])
+                            a_cnt += 1
 
-                for k in range(len(area) - 1, -1, -1):
-                    if off_code == area[k][1]:
-                        area.remove(area[k])
-                        a_cnt += 1
-                if a_cnt > 0:
-                    print('{} Area deleted.'.format(a_cnt))
+                    if a_cnt > 0:
+                        print('{} Area deleted.'.format(a_cnt))
+                    f = open('output.txt', 'a')
+                    f.write('\nArea Delete\n')
+                    f.close()
 
-                for l in range(len(product)-1, -1, -1):
-                    if off_code == product[l][1]:
-                        product.remove(product[l])
-                        p_cnt += 1
-                if p_cnt > 0:
-                    print('{} Product deleted.\n'.format(p_cnt))
+                    show_area()
 
+                if len(product) > 0:
+                    for l in range(len(product)-1, -1, -1):
+                        if off_code == product[l][1]:
+                            product.remove(product[l])
+                            p_cnt += 1
+
+                    if p_cnt > 0:
+                        print('{} Product deleted.\n'.format(p_cnt))
+                    f = open('output.txt', 'a')
+                    f.write('\nProduct Delete\n')
+                    f.close()
+
+                    show_product()
+
+                
                 # 종료 조건
                 if isDeleted == True:
-                    show_office()
                     break
                 print('!!! Check office code correctly.')
 
@@ -177,19 +222,29 @@ def office_manage():
             office_manage()
 
 
+# 2020113425 홍성민
 def show_area():
     if len(area) > 0:
+        f = open('output.txt', 'a')
+
         area.sort()
         print('*******************************************')
+        f.write('Area Code\tOfc. Code\tArea Name\tArea Manager\n')
         print('Area Code\tOfc. Code\tArea Name\tArea Manager')
         for i in range(len(area)):
             print('{}\t\t{}\t\t{}\t\t{}'.format(
                 area[i][1], area[i][0], area[i][2], area[i][3]))
+            f.write('{}\t\t{}\t\t{}\t\t{}\n'.format(
+                area[i][1], area[i][0], area[i][2], area[i][3]))
+        f.write('\n')
+        f.close()
     else:
         print('-------------------------------------------')
         print('There is no data\n')
 
 
+
+# 2020113425 홍성민
 def area_manage():
     if len(office) == 0:
         print('\n!!! Enter office info first. please.\n')
@@ -206,6 +261,9 @@ def area_manage():
                     print('\n!!! Empty list. Enter info first.\n')
                     area_manage()
                 else:
+                    f = open('output.txt', 'a')
+                    f.write('\nArea retrieve\n')
+                    f.close()
                     show_area()
                     area_manage()
 
@@ -236,6 +294,9 @@ def area_manage():
 
                                 area.append(
                                     [off_code, ar_code, ar_name, ar_m_name])
+                                f = open('output.txt', 'a')
+                                f.write('\nArea input\n')
+                                f.close()
                                 show_area()
                                 print('Input completed.\n')
                                 isInput = True
@@ -261,6 +322,9 @@ def area_manage():
                                 area[i][2] = input('Enter new area name > ')
                                 area[i][3] = input(
                                     'Enter new area manager Name > ')
+                                f = open('output.txt', 'a')
+                                f.write('\nArea update\n')
+                                f.close()
                                 show_area()
                                 print('\nUpdate completed.\n')
                                 isUpdated = True
@@ -290,6 +354,9 @@ def area_manage():
                         if f_ar_code == area[i][1] and f_of_code == area[i][0]:
                             area.remove(area[i])
                             print('Deleted.\n')
+                            f = open('output.txt', 'a')
+                            f.write('\nArea delete\n')
+                            f.close()
                             show_area()
                             a_cnt += 1
                             isDeleted = True
@@ -298,13 +365,18 @@ def area_manage():
                         print('{} Area deleted.'.format(a_cnt))
 
                     # 영역에 보관된 물품도 삭제
-                    for j in range(len(product)-1, -1, -1):
-                        if product[j][1] == f_of_code and product[j][2] == f_ar_code:
-                            product.remove(product[j])
-                            p_cnt += 1
+                    if len(product) > 0:
+                        for j in range(len(product)-1, -1, -1):
+                            if product[j][1] == f_of_code and product[j][2] == f_ar_code:
+                                product.remove(product[j])
+                                p_cnt += 1
 
-                    if p_cnt > 0:
-                        print('{} product deleted.\n'.format(p_cnt))
+                        if p_cnt > 0:
+                            print('{} product deleted.\n'.format(p_cnt))
+                        f = open('output.txt', 'a')
+                        f.write('\nProduct delete\n')
+                        f.close()
+                        show_product()
                     if isDeleted == True:
                         break
                     print('Enter exist Area code and office code correctly.')
@@ -362,12 +434,18 @@ def check_code():
 # 2019113632 박정규
 def show_product():
     product.sort()
+    f = open('output.txt', 'a')
     print('-------------------------------------')
     print('Prod.\tOfc.\tArea\tProd.\t\t\t\tLend\t\tReturn')
+    f.write('Prod.\tOfc.\tArea\tProd.\t\t\t\tLend\t\tReturn\n')
     print('code\tnumber\tnumber\ttype\tname\tprice\tLender\tdate\t\tdate')
+    f.write('code\tnumber\tnumber\ttype\tname\tprice\tLender\tdate\t\tdate\n')
     for i in range(len(product)):
         print('{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}'.format(
             product[i][0], product[i][1], product[i][2], product[i][3], product[i][4], product[i][5], product[i][6], product[i][7], product[i][8]))
+        f.write('{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\n'.format(
+            product[i][0], product[i][1], product[i][2], product[i][3], product[i][4], product[i][5], product[i][6], product[i][7], product[i][8]))
+    f.close()
 
 
 # 2019113632 박정규
@@ -383,6 +461,9 @@ def product_manage():
                 if len(product) == 0:
                     print('No data. Input product data first. please')
                 else:
+                    f = open('output.txt', 'a')
+                    f.write('\nProduct retrieve\n')
+                    f.close()
                     show_product()
                     print()
 
@@ -411,6 +492,10 @@ def product_manage():
                 product.append([p_code, off_num, ar_num, p_type,
                                p_name, p_price, lender, len_date, ret_date])
 
+                f = open('output.txt', 'a')
+                f.write('\nProduct input\n')
+                f.close()
+                show_product()
                 product_manage()
 
             # Lend/Return
@@ -459,6 +544,10 @@ def product_manage():
                                         product[i][8] = ' '
                                         print('Lending completed.\n')
                                         isLent = True
+                                        f = open('output.txt', 'a')
+                                        f.write('\nProduct lent\n')
+                                        f.close()
+
                                         show_product()
                                         break
 
@@ -496,6 +585,10 @@ def product_manage():
                                                 'Enter Return date correctly(must be 8 numbers) > ')
                                         isReturned = True
                                 if isReturned == True:
+                                    f = open('output.txt', 'a')
+                                    f.write('\nProduct return\n')
+                                    f.close()
+                                    show_product()
                                     break
                                 print('\n!!! Check Product Code again. Please.\n')
 
@@ -525,6 +618,9 @@ def product_manage():
 
                                 product[i][1], product[i][2] = off_num, ar_num
                                 isMoved = True
+                                f = open('output.txt', 'a')
+                                f.write('\nProduct transfer\n')
+                                f.close()
                                 show_product()
                                 print('Transfer completed.\n')
                                 break
@@ -546,6 +642,10 @@ def product_manage():
                             product[i][4] = input('Enter new product name > ')
                             product[i][5] = input('Enter new product price > ')
                             isUpdated = True
+                            f = open('output.txt', 'a')
+                            f.write('\nProduct update\n')
+                            f.close()
+                            show_product
                             break
                     if isUpdated == True:
                         break
@@ -566,6 +666,9 @@ def product_manage():
                             if p_code == product[i][0]:
                                 product.remove(product[i])
                                 isDeleted = True
+                                f = open('output.txt', 'a')
+                                f.write('\nProduct delete\n')
+                                f.close()                            
                                 show_product()
                                 print('Deleted successfully.\n')
                                 break
@@ -593,7 +696,8 @@ def show_p_code():
 
 # 2019113632 박정규
 def show_all_prod():
-    f = open('output.txt', 'w')
+    f = open('output.txt', 'a')
+    f.write('\nSearch all product\n')
     for i in range(len(office)):
         print('\n#{}\t{} {}\t\tManager:{}'.format(
             office[i][0], office[i][1], office[i][2], office[i][3]))
@@ -607,22 +711,31 @@ def show_all_prod():
                             area[j][1], area[j][2], product[k][0], product[k][3], area[j][3]))
                         f.write('\t#{} | {}\t(#{}){} | {} in charge\n'.format(
                             area[j][1], area[j][2], product[k][0], product[k][3], area[j][3]))
-
+        f.write('\n')
         print()
+    
     f.close()
 
 
 def find_prod(idx):
+    f = open('output.txt', 'a')
+    f.write('\nSearch one product\n')
+
     for i in range(len(office)):
         if product[idx][1] == office[i][0]:
             print('\n#{}\t{} {}\t\tManager:{}'.format(
+                office[i][0], office[i][1], office[i][2], office[i][3]))
+            f.write('\n#{}\t{} {}\t\tManager:{}\n'.format(
                 office[i][0], office[i][1], office[i][2], office[i][3]))
     for j in range(len(area)):
         if (product[idx][2] == area[j][1]) and (area[j][0] == product[idx][1]):
             print('\t#{} | {}\t(#{}){} | {} in charge'.format(
                 area[j][1], area[j][2], product[idx][0], product[idx][3], area[j][3]))
-
+            f.write('\t#{} | {}\t(#{}){} | {} in charge\n'.format(
+                area[j][1], area[j][2], product[idx][0], product[idx][3], area[j][3]))
+    f.write('\n')
     print()
+    f.close()
 
 
 # 2019113632 박정규

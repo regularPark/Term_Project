@@ -1,30 +1,85 @@
 
-#0001	Whk Law		Manager:Kim
-	#001 | Kor	(#A)B | Lee in charge
-	#001 | Kor	(#B)H/P | Lee in charge
-	#002 | Eng	(#C)Smp | Baek in charge
-	#002 | Eng	(#D)IoT | Baek in charge
-	#002 | Eng	(#I)NBA | Baek in charge
-	#002 | Eng	(#R)Bag | Baek in charge
-	#002 | Eng	(#S)Socks | Baek in charge
+Input
+Ofc.	Bld.		Ofc.		Ofc.
+Code	Name		Address		Manager
+0001	1		1		1
 
-#0002	Mhk Teach		Manager:Lee
-	#001 | North	(#E)BB | Kim in charge
-	#001 | North	(#L)NHL | Kim in charge
-	#002 | West	(#F)BN | Jeon in charge
-	#002 | West	(#G)PL | Jeon in charge
-	#002 | West	(#T)Gun | Jeon in charge
 
-#0003	Nek Math		Manager:Jung
-	#001 | East	(#H)Liga | Park in charge
-	#002 | South	(#N)Fish | Moon in charge
-	#002 | South	(#P)Foot | Moon in charge
+Retrieve
+Ofc. Code	Bld. name	Ofc. address	Ofc. Manager
+0001		1		1		1
+Ofc.	Bld.		Ofc.		Ofc.
+Code	Name		Address		Manager
+0001	2		2		2
 
-#0004	Jkk Science		Manager:Kang
-	#001 | USA	(#Q)Top | Joe in charge
-	#002 | ITA	(#J)Swim | Andrea in charge
-	#002 | ITA	(#K)Ball | Andrea in charge
-	#002 | ITA	(#O)Foot | Andrea in charge
 
-#0005	Qkh Chem		Manager:Min
-	#001 | SWI	(#M)Boat | Granit in charge
+Office Input
+Ofc.	Bld.		Ofc.		Ofc.
+Code	Name		Address		Manager
+0001	1		1		1
+
+
+Office Update
+Ofc.	Bld.		Ofc.		Ofc.
+Code	Name		Address		Manager
+0001	2		2		2
+
+
+Office Delete
+Ofc.	Bld.		Ofc.		Ofc.
+Code	Name		Address		Manager
+
+Ofc.	Bld.		Ofc.		Ofc.
+Code	Name		Address		Manager
+
+
+Office Input
+Ofc.	Bld.		Ofc.		Ofc.
+Code	Name		Address		Manager
+0002	1		1		1
+
+
+Area input
+Area Code	Ofc. Code	Area Name	Area Manager
+001		0002		1		1
+
+Area Code	Ofc. Code	Area Name	Area Manager
+001		0002		1		1
+
+
+Area update
+Area Code	Ofc. Code	Area Name	Area Manager
+001		0002		3		3
+
+
+Office Retrieve
+Ofc. Code	Bld. name	Ofc. address	Ofc. Manager
+0001		Whk		Law		Kim
+0002		Mhk		Teach		Lee
+0003		Nek		Math		Jung
+0004		Jkk		Science		Kang
+0005		Qkh		Chem		Min
+
+Product retrieve
+Prod.	Ofc.	Area	Prod.				Lend		Return
+code	number	number	type	name	price	Lender	date		date
+A	0001	001	BF	LOL	100K	 	 	 
+B	0001	001	HP	IK	190K	 	 	 
+BB	0002	001	MS	TYO	190K	 	 	 
+C	0001	002	SMP	IPH	1B	JIM	20200713	20200813
+D	0001	002	BASKET	MART	19B	 	 	 
+E	0002	001	IOT	FRI	20K	 	 	 
+FISH	0003	002	IOR	QWE	9K	 	 	 
+FJ	0005	003	TYO	KIA	90B	 	 	 
+G	0002	002	BN	KLP	8B	 	 	 
+H	0003	001	LIGA	MES	90B	BAEK	20200704	20201013
+I	0004	002	FOOT	HAM	8K	 	 	 
+K	0005	001	BALL	BASE	89K	 	 	 
+L	0002	001	NHL	UIO	1K	 	 	 
+M	0005	002	BOAT	SWQ	95B	 	 	 
+MS	0002	001	MIC	15K	30K	 	 	 
+OPO	0005	003	KOK	LOQ	89B	 	 	 
+P	0003	002	FOOT	ASW	56K	 	 	 
+Q	0004	001	TOP	BIG	67B	 	 	 
+R	0001	002	BAG	COM	18B	 	 	 
+S	0001	002	UIO	NAME	19K	 	 	 
